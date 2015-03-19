@@ -1,0 +1,16 @@
+---
+title: "Project"
+author: "carlos rios"
+date: "Thursday, March 19, 2015"
+output: html_document
+---
+
+## Synopsis
+
+## Libraries
+
+## Loading and Processing the Raw Data
+
+## Exploratory data analysis
+
+
