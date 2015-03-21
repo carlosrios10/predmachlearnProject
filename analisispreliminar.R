@@ -1,7 +1,7 @@
 getwd()
 setwd("C:\\Users\\Usuarioç\\Desktop\\carlos\\predmachlearn\\predmachlearnProject")
-train<-read.csv(file="datos/pml-training.csv")
-test<-read.csv(file="datos/pml-testing.csv")
+train<-read.csv(file="datos/pml-training.csv",na.strings=c("NA",""))
+test<-read.csv(file="datos/pml-testing.csv",na.strings=c("NA",""))
 
 library(caret)
 library(rattle)
@@ -12,6 +12,7 @@ summary(train)
 head(train)
 names(train)
 sum(is.na(train))/(19622*160)
+head(train[,7:8])
 
 resumen<-function(df){
         columnas<-names(df)
@@ -25,8 +26,6 @@ resumen<-function(df){
         resultado<-rbind(resultado,data.frame(variable=columnas[i],
                                               na=sum(is.na(df[,i])),
                                               pna=sum(is.na(df[,i]))/cantObs,
-                                              vacio=sum(df[,i]==""),
-                                              pvacio=sum(df[,i]=="")/cantObs
                                               ))
                 
         }
@@ -72,7 +71,7 @@ fitControl <- trainControl(## 10-fold CV
         method = "cv",
         number = 3)
 j48Grid <-  expand.grid(C = c(0.1,0.2,0.25,0.3))
-set.seed(825)
+set.seed(4600)
 tunModFit<-train(classe~.,method="J48",
                  data=training,
                  trControl = fitControl,
@@ -83,10 +82,20 @@ confusionMatrix(data = predccClases, testing$classe)
 
 trellis.par.set(caretTheme())
 plot(tunModFit)
-plot(tunModFit, metric = "Kappa")
-ggplot(tunModFit)
+### random forest
+mostly_data<-apply(!is.na(train),2,sum)>19621
+trainReducido<-train[,mostly_data]
+trainReducido<-trainReducido[,7:60]
 
-###
-head(training)
-str(training)
+sum(mostly_data)
 
+library(doParallel)
+registerDoParallel( detectCores())
+set.seed(4600)
+rfModel<-train(classe~.,data=training,method="rf",trControl=fitControl)
+stopImplicitCluster()
+print(rfModel$fin)
+trellis.par.set(caretTheme())
+plot(rfModel)
+13737/3
+holaaa

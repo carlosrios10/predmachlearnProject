@@ -5,19 +5,16 @@ resumen<-function(df){
     cantObs<-dim(df)[1]
     resultado<-data.frame(variable=vector(),
                           na=vector(),
-                          pna=vector(),
-                          vacio=vector(),
-                          pvacio=vector())
+                          pna=vector()
+                          )
     for(i in 1:length(names(df))){
         resultado<-rbind(resultado,data.frame(variable=columnas[i],
                                               na=sum(is.na(df[,i])),
-                                              pna=sum(is.na(df[,i]))/cantObs,
-                                              vacio=sum(df[,i]==""),
-                                              pvacio=sum(df[,i]=="")/cantObs
+                                              pna=sum(is.na(df[,i]))/cantObs
         ))
         
     }
-    return(resultado[order(-resultado$na,-resultado$pvacio),])
+    return(resultado[order(-resultado$na),])
 }
 
 
