@@ -1,5 +1,5 @@
 getwd()
-setwd("D:/predmachlearn-012/Proyectos/CourseProject")
+setwd("C:\\Users\\Usuarioç\\Desktop\\carlos\\predmachlearn\\predmachlearnProject")
 train<-read.csv(file="datos/pml-training.csv")
 test<-read.csv(file="datos/pml-testing.csv")
 
