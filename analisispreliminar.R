@@ -50,10 +50,21 @@ inTrain<-createDataPartition(y=trainReducido$classe,p=0.7,list=F)
 training<-trainReducido[inTrain,]
 table(training$classe)/19622
 testing<-trainReducido[-inTrain,]
+
+fitControl <- trainControl(## 10-fold CV
+        method = "cv",
+        number = 10)
 ### CART
-modFit<-train(classe~.,method="rpart",data=training)
+se<-seq(0.00001, 0.0001, by= 0.00001)
+cartGrid <-  expand.grid(cp = se)
+modFit<-train(classe~.,method="rpart",
+              data=training,
+              trControl = fitControl,
+              tuneGrid = cartGrid
+              )
 modFit
 fancyRpartPlot(modFit$finalModel)
+plot(modFit)
 predccClases<-predict(modFit, newdata = testing)
 confusionMatrix(data = predccClases, testing$classe)
 #### j48
@@ -72,3 +83,10 @@ confusionMatrix(data = predccClases, testing$classe)
 
 trellis.par.set(caretTheme())
 plot(tunModFit)
+plot(tunModFit, metric = "Kappa")
+ggplot(tunModFit)
+
+###
+head(training)
+str(training)
+
