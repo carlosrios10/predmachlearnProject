@@ -10,3 +10,13 @@ We found that the method random forest had the best accurancy.
 
 * main.R : Main script performs the sequence of steps required to predicct how well a person did an exercise.
 * functions.R : Script that contains functions used by main.R. 
+
+## Installation
+To run this project you must perform these steps below. 
+
+1. Download project.
+2. Download [training data set][train] and [testing data set][test] and save them into a folder called "datos" into your working directory.
+3. Execute the file main.R.
+
+[train]:https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv
+[test]:https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv 
