@@ -16,7 +16,10 @@ To run this project you must perform these steps below.
 
 1. Download project.
 2. Download [training data set][train] and [testing data set][test] and save them into a folder called "datos" into your working directory.
-3. Execute the file main.R.
+3. Execute the file main.R or predmachlearnProject.Rmd file.  
 
 [train]:https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv
 [test]:https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv 
+
+## Other files
+*predmachlearnProject.md* and *predmachlearnProject.html* are  files that describe our analysis.
