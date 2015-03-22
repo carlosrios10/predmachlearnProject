@@ -1,3 +1,5 @@
+# This file contains all of steps to prediction how well a person did an exercise.
+
 # Firstly wwe load the library
 library(caret)
 library(rattle)
@@ -12,7 +14,7 @@ tidyTrain<-train[,countNA[countNA$na==0,]$variable]
 tidyTrain<-tidyTrain[,-1:-6]
 dim(tidyTrain)
 # exploratory data analysis
-# we find the model
+# modeling
 inTrain<-createDataPartition(y=tidyTrain$classe,p=0.7,list=F)
 training<-tidyTrain[inTrain,]
 testing<-tidyTrain[-inTrain,]
